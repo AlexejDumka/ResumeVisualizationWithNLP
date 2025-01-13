@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+service TextProcessor {
+  rpc GenerateGraph (TextRequest) returns (ImageResponse);
+  rpc GenerateWordCloud (TextRequest) returns (ImageResponse);
+}
+
+message TextRequest {
+  string text = 1;
+  GraphType type = 2;
+  GraphInfo info = 3;
+}
+
+message ImageResponse {
+  bytes image_data = 1;
+}
+
+enum GraphType {
+  UNKNOWN = 0;
+  BAR = 1;
+  PIE = 2;
+  DONUT = 3;
+  NETWORK_DIAGRAM = 4;
+}
+
+message GraphInfo {
+  BarInfo bar_info = 1;
+  PieInfo pie_info = 2;
+  DonutInfo donut_info = 3;
+  NetworkDiagramInfo network_diagram_info = 4;
+}
+
+message BarInfo {
+  repeated string labels = 1;
+  repeated int32 values = 2;
+}
+
+message PieInfo {
+  repeated string labels = 1;
+  repeated int32 values = 2;
+}
+
+message DonutInfo {
+  repeated string labels = 1;
+  repeated int32 values = 2;
+  float hole_size = 3;
+}
+
+message NetworkDiagramInfo {
+  repeated string nodes = 1;
+  repeated Edge edges = 2;
+}
+
+message Edge {
+  string source = 1;
+  string target = 2;
+}
