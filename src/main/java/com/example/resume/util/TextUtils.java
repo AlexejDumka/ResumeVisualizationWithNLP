@@ -90,7 +90,7 @@ public class TextUtils {
         }
 
         // Метод для токенизации текста
-        private static String[] tokenizeText(String text) {
+        public static String[] tokenizeText(String text) {
             SimpleTokenizer tokenizer = SimpleTokenizer.INSTANCE;
             return tokenizer.tokenize(text);
         }
@@ -121,50 +121,19 @@ public class TextUtils {
             return matchingPhrases;
         }
 
-   //     public static void main(String[] args) {
-            // Пример текста секции Experience
-//            String experienceText = """
-//            Developed a Spring Boot application using microservices architecture.
-//            Managed deployments with Docker and Kubernetes. Enhanced performance using Java and Spring Boot.
-//            """;
-
-            // Пример текста секции Skills
-//            String skillsText = """
-//            Java, Spring Boot, Microservices, Docker, Kubernetes, REST API
-//            """;
-
-            // Поиск совпадающих словосочетаний
-           // Set<String> matchingPhrases = findMatchingPhrases(experienceText, skillsText);
-
-            // Вывод совпадающих фраз
-           // System.out.println("Matching Phrases: " + matchingPhrases);
-       // }
-  //  }
-
- //   public static void main(String[] args) throws IOException {
-     //   String text = "The quick brown fox jumps over the lazy dog. An efficient algorithm solves the problem.";
-
-//        List<String> adjectiveNounBigrams = extractAdjectiveNounBigrams(text);
-//        System.out.println("Adjective + Noun Bigrams: " + adjectiveNounBigrams);
-//
-//        List<String> nounVerbNounTrigrams = extractNounVerbNounTrigrams(text);
-//        System.out.println("Noun + Verb + Noun Trigrams: " + nounVerbNounTrigrams);
-//    }
-
-
-    private static List<String> removeNonAscii(List<String> words) {
+      public static List<String> removeNonAscii(List<String> words) {
         return words.stream()
                 .map(word -> Normalizer.normalize(word, Normalizer.Form.NFKD).replaceAll("[^\\p{ASCII}]", ""))
                 .collect(Collectors.toList());
     }
 
-    private static List<String> toLowerCase(List<String> words) {
+    public static List<String> toLowerCase(List<String> words) {
         return words.stream()
                 .map(String::toLowerCase)
                 .collect(Collectors.toList());
     }
 
-    private static List<String> removePunctuation(List<String> words) {
+    public static List<String> removePunctuation(List<String> words) {
         return words.stream()
                 .map(word -> word.replaceAll("[^\\w\\s]", ""))
                 .filter(word -> !word.isEmpty())
@@ -177,10 +146,12 @@ public class TextUtils {
         }
     }
 
-    private static List<String> removeStopWords(List<String> words) throws IOException {
+    public static List<String> removeStopWords(List<String> words) throws IOException {
         List<String> stopWords = loadStopWords();
         return words.stream()
                 .filter(word -> !stopWords.contains(word))
                 .collect(Collectors.toList());
     }
+
+
 }

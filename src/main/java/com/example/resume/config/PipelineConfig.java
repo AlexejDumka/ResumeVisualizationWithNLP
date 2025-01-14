@@ -1,6 +1,8 @@
-package com.example.resume.core;
+package com.example.resume.config;
 
-import com.example.resume.pipeline.*;
+import com.example.resume.core.Pipeline;
+import com.example.resume.pipeline.extractors.*;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,32 +13,43 @@ import java.util.List;
 public class PipelineConfig {
 
     @Bean
-    public Pipeline<File, String> filePipeline(PdfExtractionStage pdfExtractionStage) {
-        return new Pipeline<>(List.of(pdfExtractionStage));
+    public Pipeline<File, Long> ResumePdfContentExtractorPipeline(ResumePdfContentExtractor resumePdfContentExtractor) {
+        return new Pipeline<>(List.of(resumePdfContentExtractor));
     }
 
     @Bean
-    public Pipeline<String, String> textPipeline(TextNormalizationStage textNormalizationStage) {
-        return new Pipeline<>(List.of(textNormalizationStage));
+    @Qualifier("education")
+    public Pipeline<Long, Long> ResumeEducationsExtractionPipeline(ResumeEducationsExtraction resumeEducationsExtraction) {
+        return new Pipeline<>(List.of(resumeEducationsExtraction));
     }
 
     @Bean
-    public Pipeline<String, List<String>> sectionPipeline(SectionSplittingStage sectionSplittingStage) {
-        return new Pipeline<>(List.of(sectionSplittingStage));
+    @Qualifier("experience")
+    public Pipeline<Long, Long> ResumeWorkExperiencesExtractionPipeline(ResumeExperiencesExtraction resumeExperiencesExtraction) {
+        return new Pipeline<>(List.of(resumeExperiencesExtraction));
     }
 
     @Bean
-    public Pipeline<String, List<String>> keywordPipeline(KeywordSearchStage keywordSearchStage) {
-        return new Pipeline<>(List.of(keywordSearchStage));
+    @Qualifier("skill")
+    public Pipeline<Long, Long> ResumeSkiilsExtractionPipeline(ResumeSkillsExtractor resumeSkillsExtractor) {
+        return new Pipeline<>(List.of(resumeSkillsExtractor));
     }
 
     @Bean
-    public Pipeline<String, List<String>> skillPipeline(SkillSearchStage skillSearchStage) {
-        return new Pipeline<>(List.of(skillSearchStage));
+    @Qualifier("section")
+    public Pipeline<Long, Long> ResumeSectionExtractionPipeline(ResumeSectionExtractor resumeSectionExtraction) {
+        return new Pipeline<>(List.of(resumeSectionExtraction));
     }
 
+
     @Bean
-    public Pipeline<String, String> categorizationPipeline(CategorizationStage categorizationStage) {
-        return new Pipeline<>(List.of(categorizationStage));
+    @Qualifier("personalInfo")
+    public Pipeline<Long, Long> ResumePersonalInfoExtractionPipeline(ResumePersonalInfoExtractor resumePersonalInfoExtractor) {
+        return new Pipeline<>(List.of(resumePersonalInfoExtractor));
+    }
+    @Bean
+    @Qualifier("summary")
+    public Pipeline<Long, Long> ResumeSummaryExtractionPipeline(ResumeSummaryExtraction resumeSummaryExtraction) {
+        return new Pipeline<>(List.of(resumeSummaryExtraction));
     }
 }

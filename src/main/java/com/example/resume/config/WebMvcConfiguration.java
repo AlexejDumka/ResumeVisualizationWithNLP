@@ -1,6 +1,5 @@
-package com.lexy.persistentapi.configuration;
+package com.example.resume.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lexy.persistentapi.util.DTOModelMapper;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -19,15 +18,5 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     public WebMvcConfiguration(ApplicationContext applicationContext, EntityManager entityManager) {
         this.applicationContext = applicationContext;
         this.entityManager = entityManager;
-    }
-//
-//    public WebMvcConfiguration(ApplicationContext applicationContext) {
-//        this.applicationContext = applicationContext;
-//    }
-
-    @Override
-    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-        ObjectMapper objectMapper = Jackson2ObjectMapperBuilder.json().applicationContext(this.applicationContext).build();
-        argumentResolvers.add(new DTOModelMapper(objectMapper, entityManager));
     }
 }

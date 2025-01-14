@@ -1,7 +1,13 @@
 package com.example.resume.dto;
+import lombok.*;
+import java.io.Serializable;
 
-/**
- * DTO for {@link com.example.resume.entity.RequiredSkill}
- */
-public class RequiredSkillDto {
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class RequiredSkillDto implements Serializable {
+    Long id;
+    String name;
+    PositionDto position;
 }

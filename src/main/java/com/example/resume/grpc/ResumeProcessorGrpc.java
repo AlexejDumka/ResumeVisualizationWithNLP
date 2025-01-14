@@ -1,5 +1,4 @@
 package com.example.resume.grpc;
-
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 
 /**
@@ -8,37 +7,37 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
     value = "by gRPC proto compiler (version 1.65.1)",
     comments = "Source: gRPC.proto")
 @io.grpc.stub.annotations.GrpcGenerated
-public final class TextProcessorGrpc {
+public final class ResumeProcessorGrpc {
 
-  private TextProcessorGrpc() {}
+  private ResumeProcessorGrpc() {}
 
-  public static final java.lang.String SERVICE_NAME = "TextProcessor";
+  public static final java.lang.String SERVICE_NAME = "ResumeProcessor";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<GRPC.TextRequest,
+  private static volatile io.grpc.MethodDescriptor<GRPC.GraphRequest,
       GRPC.ImageResponse> getGenerateGraphMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "GenerateGraph",
-      requestType = GRPC.TextRequest.class,
+      requestType = GRPC.GraphRequest.class,
       responseType = GRPC.ImageResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<GRPC.TextRequest,
+  public static io.grpc.MethodDescriptor<GRPC.GraphRequest,
       GRPC.ImageResponse> getGenerateGraphMethod() {
-    io.grpc.MethodDescriptor<GRPC.TextRequest, GRPC.ImageResponse> getGenerateGraphMethod;
-    if ((getGenerateGraphMethod = TextProcessorGrpc.getGenerateGraphMethod) == null) {
-      synchronized (TextProcessorGrpc.class) {
-        if ((getGenerateGraphMethod = TextProcessorGrpc.getGenerateGraphMethod) == null) {
-          TextProcessorGrpc.getGenerateGraphMethod = getGenerateGraphMethod =
-              io.grpc.MethodDescriptor.<GRPC.TextRequest, GRPC.ImageResponse>newBuilder()
+    io.grpc.MethodDescriptor<GRPC.GraphRequest, GRPC.ImageResponse> getGenerateGraphMethod;
+    if ((getGenerateGraphMethod = ResumeProcessorGrpc.getGenerateGraphMethod) == null) {
+      synchronized (ResumeProcessorGrpc.class) {
+        if ((getGenerateGraphMethod = ResumeProcessorGrpc.getGenerateGraphMethod) == null) {
+          ResumeProcessorGrpc.getGenerateGraphMethod = getGenerateGraphMethod =
+              io.grpc.MethodDescriptor.<GRPC.GraphRequest, GRPC.ImageResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GenerateGraph"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  GRPC.TextRequest.getDefaultInstance()))
+                  GRPC.GraphRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   GRPC.ImageResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new TextProcessorMethodDescriptorSupplier("GenerateGraph"))
+              .setSchemaDescriptor(new ResumeProcessorMethodDescriptorSupplier("GenerateGraph"))
               .build();
         }
       }
@@ -46,30 +45,30 @@ public final class TextProcessorGrpc {
     return getGenerateGraphMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<GRPC.TextRequest,
+  private static volatile io.grpc.MethodDescriptor<GRPC.WordCloudRequest,
       GRPC.ImageResponse> getGenerateWordCloudMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "GenerateWordCloud",
-      requestType = GRPC.TextRequest.class,
+      requestType = GRPC.WordCloudRequest.class,
       responseType = GRPC.ImageResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<GRPC.TextRequest,
+  public static io.grpc.MethodDescriptor<GRPC.WordCloudRequest,
       GRPC.ImageResponse> getGenerateWordCloudMethod() {
-    io.grpc.MethodDescriptor<GRPC.TextRequest, GRPC.ImageResponse> getGenerateWordCloudMethod;
-    if ((getGenerateWordCloudMethod = TextProcessorGrpc.getGenerateWordCloudMethod) == null) {
-      synchronized (TextProcessorGrpc.class) {
-        if ((getGenerateWordCloudMethod = TextProcessorGrpc.getGenerateWordCloudMethod) == null) {
-          TextProcessorGrpc.getGenerateWordCloudMethod = getGenerateWordCloudMethod =
-              io.grpc.MethodDescriptor.<GRPC.TextRequest, GRPC.ImageResponse>newBuilder()
+    io.grpc.MethodDescriptor<GRPC.WordCloudRequest, GRPC.ImageResponse> getGenerateWordCloudMethod;
+    if ((getGenerateWordCloudMethod = ResumeProcessorGrpc.getGenerateWordCloudMethod) == null) {
+      synchronized (ResumeProcessorGrpc.class) {
+        if ((getGenerateWordCloudMethod = ResumeProcessorGrpc.getGenerateWordCloudMethod) == null) {
+          ResumeProcessorGrpc.getGenerateWordCloudMethod = getGenerateWordCloudMethod =
+              io.grpc.MethodDescriptor.<GRPC.WordCloudRequest, GRPC.ImageResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GenerateWordCloud"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  GRPC.TextRequest.getDefaultInstance()))
+                  GRPC.WordCloudRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   GRPC.ImageResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new TextProcessorMethodDescriptorSupplier("GenerateWordCloud"))
+              .setSchemaDescriptor(new ResumeProcessorMethodDescriptorSupplier("GenerateWordCloud"))
               .build();
         }
       }
@@ -80,45 +79,45 @@ public final class TextProcessorGrpc {
   /**
    * Creates a new async stub that supports all call types for the service
    */
-  public static TextProcessorStub newStub(io.grpc.Channel channel) {
-    io.grpc.stub.AbstractStub.StubFactory<TextProcessorStub> factory =
-      new io.grpc.stub.AbstractStub.StubFactory<TextProcessorStub>() {
+  public static ResumeProcessorStub newStub(io.grpc.Channel channel) {
+    io.grpc.stub.AbstractStub.StubFactory<ResumeProcessorStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<ResumeProcessorStub>() {
         @java.lang.Override
-        public TextProcessorStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
-          return new TextProcessorStub(channel, callOptions);
+        public ResumeProcessorStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new ResumeProcessorStub(channel, callOptions);
         }
       };
-    return TextProcessorStub.newStub(factory, channel);
+    return ResumeProcessorStub.newStub(factory, channel);
   }
 
   /**
    * Creates a new blocking-style stub that supports unary and streaming output calls on the service
    */
-  public static TextProcessorBlockingStub newBlockingStub(
+  public static ResumeProcessorBlockingStub newBlockingStub(
       io.grpc.Channel channel) {
-    io.grpc.stub.AbstractStub.StubFactory<TextProcessorBlockingStub> factory =
-      new io.grpc.stub.AbstractStub.StubFactory<TextProcessorBlockingStub>() {
+    io.grpc.stub.AbstractStub.StubFactory<ResumeProcessorBlockingStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<ResumeProcessorBlockingStub>() {
         @java.lang.Override
-        public TextProcessorBlockingStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
-          return new TextProcessorBlockingStub(channel, callOptions);
+        public ResumeProcessorBlockingStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new ResumeProcessorBlockingStub(channel, callOptions);
         }
       };
-    return TextProcessorBlockingStub.newStub(factory, channel);
+    return ResumeProcessorBlockingStub.newStub(factory, channel);
   }
 
   /**
    * Creates a new ListenableFuture-style stub that supports unary calls on the service
    */
-  public static TextProcessorFutureStub newFutureStub(
+  public static ResumeProcessorFutureStub newFutureStub(
       io.grpc.Channel channel) {
-    io.grpc.stub.AbstractStub.StubFactory<TextProcessorFutureStub> factory =
-      new io.grpc.stub.AbstractStub.StubFactory<TextProcessorFutureStub>() {
+    io.grpc.stub.AbstractStub.StubFactory<ResumeProcessorFutureStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<ResumeProcessorFutureStub>() {
         @java.lang.Override
-        public TextProcessorFutureStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
-          return new TextProcessorFutureStub(channel, callOptions);
+        public ResumeProcessorFutureStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new ResumeProcessorFutureStub(channel, callOptions);
         }
       };
-    return TextProcessorFutureStub.newStub(factory, channel);
+    return ResumeProcessorFutureStub.newStub(factory, channel);
   }
 
   /**
@@ -127,49 +126,49 @@ public final class TextProcessorGrpc {
 
     /**
      */
-    default void generateGraph(GRPC.TextRequest request,
+    default void generateGraph(GRPC.GraphRequest request,
         io.grpc.stub.StreamObserver<GRPC.ImageResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGenerateGraphMethod(), responseObserver);
     }
 
     /**
      */
-    default void generateWordCloud(GRPC.TextRequest request,
+    default void generateWordCloud(GRPC.WordCloudRequest request,
         io.grpc.stub.StreamObserver<GRPC.ImageResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGenerateWordCloudMethod(), responseObserver);
     }
   }
 
   /**
-   * Base class for the server implementation of the service TextProcessor.
+   * Base class for the server implementation of the service ResumeProcessor.
    */
-  public static abstract class TextProcessorImplBase
+  public static abstract class ResumeProcessorImplBase
       implements io.grpc.BindableService, AsyncService {
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
-      return TextProcessorGrpc.bindService(this);
+      return ResumeProcessorGrpc.bindService(this);
     }
   }
 
   /**
-   * A stub to allow clients to do asynchronous rpc calls to service TextProcessor.
+   * A stub to allow clients to do asynchronous rpc calls to service ResumeProcessor.
    */
-  public static final class TextProcessorStub
-      extends io.grpc.stub.AbstractAsyncStub<TextProcessorStub> {
-    private TextProcessorStub(
+  public static final class ResumeProcessorStub
+      extends io.grpc.stub.AbstractAsyncStub<ResumeProcessorStub> {
+    private ResumeProcessorStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected TextProcessorStub build(
+    protected ResumeProcessorStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
-      return new TextProcessorStub(channel, callOptions);
+      return new ResumeProcessorStub(channel, callOptions);
     }
 
     /**
      */
-    public void generateGraph(GRPC.TextRequest request,
+    public void generateGraph(GRPC.GraphRequest request,
         io.grpc.stub.StreamObserver<GRPC.ImageResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGenerateGraphMethod(), getCallOptions()), request, responseObserver);
@@ -177,7 +176,7 @@ public final class TextProcessorGrpc {
 
     /**
      */
-    public void generateWordCloud(GRPC.TextRequest request,
+    public void generateWordCloud(GRPC.WordCloudRequest request,
         io.grpc.stub.StreamObserver<GRPC.ImageResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGenerateWordCloudMethod(), getCallOptions()), request, responseObserver);
@@ -185,56 +184,56 @@ public final class TextProcessorGrpc {
   }
 
   /**
-   * A stub to allow clients to do synchronous rpc calls to service TextProcessor.
+   * A stub to allow clients to do synchronous rpc calls to service ResumeProcessor.
    */
-  public static final class TextProcessorBlockingStub
-      extends io.grpc.stub.AbstractBlockingStub<TextProcessorBlockingStub> {
-    private TextProcessorBlockingStub(
+  public static final class ResumeProcessorBlockingStub
+      extends io.grpc.stub.AbstractBlockingStub<ResumeProcessorBlockingStub> {
+    private ResumeProcessorBlockingStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected TextProcessorBlockingStub build(
+    protected ResumeProcessorBlockingStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
-      return new TextProcessorBlockingStub(channel, callOptions);
+      return new ResumeProcessorBlockingStub(channel, callOptions);
     }
 
     /**
      */
-    public GRPC.ImageResponse generateGraph(GRPC.TextRequest request) {
+    public GRPC.ImageResponse generateGraph(GRPC.GraphRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGenerateGraphMethod(), getCallOptions(), request);
     }
 
     /**
      */
-    public GRPC.ImageResponse generateWordCloud(GRPC.TextRequest request) {
+    public GRPC.ImageResponse generateWordCloud(GRPC.WordCloudRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGenerateWordCloudMethod(), getCallOptions(), request);
     }
   }
 
   /**
-   * A stub to allow clients to do ListenableFuture-style rpc calls to service TextProcessor.
+   * A stub to allow clients to do ListenableFuture-style rpc calls to service ResumeProcessor.
    */
-  public static final class TextProcessorFutureStub
-      extends io.grpc.stub.AbstractFutureStub<TextProcessorFutureStub> {
-    private TextProcessorFutureStub(
+  public static final class ResumeProcessorFutureStub
+      extends io.grpc.stub.AbstractFutureStub<ResumeProcessorFutureStub> {
+    private ResumeProcessorFutureStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected TextProcessorFutureStub build(
+    protected ResumeProcessorFutureStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
-      return new TextProcessorFutureStub(channel, callOptions);
+      return new ResumeProcessorFutureStub(channel, callOptions);
     }
 
     /**
      */
     public com.google.common.util.concurrent.ListenableFuture<GRPC.ImageResponse> generateGraph(
-        GRPC.TextRequest request) {
+        GRPC.GraphRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getGenerateGraphMethod(), getCallOptions()), request);
     }
@@ -242,7 +241,7 @@ public final class TextProcessorGrpc {
     /**
      */
     public com.google.common.util.concurrent.ListenableFuture<GRPC.ImageResponse> generateWordCloud(
-        GRPC.TextRequest request) {
+        GRPC.WordCloudRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getGenerateWordCloudMethod(), getCallOptions()), request);
     }
@@ -269,11 +268,11 @@ public final class TextProcessorGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_GENERATE_GRAPH:
-          serviceImpl.generateGraph((GRPC.TextRequest) request,
+          serviceImpl.generateGraph((GRPC.GraphRequest) request,
               (io.grpc.stub.StreamObserver<GRPC.ImageResponse>) responseObserver);
           break;
         case METHODID_GENERATE_WORD_CLOUD:
-          serviceImpl.generateWordCloud((GRPC.TextRequest) request,
+          serviceImpl.generateWordCloud((GRPC.WordCloudRequest) request,
               (io.grpc.stub.StreamObserver<GRPC.ImageResponse>) responseObserver);
           break;
         default:
@@ -298,22 +297,22 @@ public final class TextProcessorGrpc {
           getGenerateGraphMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              GRPC.TextRequest,
+              GRPC.GraphRequest,
               GRPC.ImageResponse>(
                 service, METHODID_GENERATE_GRAPH)))
         .addMethod(
           getGenerateWordCloudMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              GRPC.TextRequest,
+              GRPC.WordCloudRequest,
               GRPC.ImageResponse>(
                 service, METHODID_GENERATE_WORD_CLOUD)))
         .build();
   }
 
-  private static abstract class TextProcessorBaseDescriptorSupplier
+  private static abstract class ResumeProcessorBaseDescriptorSupplier
       implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
-    TextProcessorBaseDescriptorSupplier() {}
+    ResumeProcessorBaseDescriptorSupplier() {}
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
@@ -322,21 +321,21 @@ public final class TextProcessorGrpc {
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.ServiceDescriptor getServiceDescriptor() {
-      return getFileDescriptor().findServiceByName("TextProcessor");
+      return getFileDescriptor().findServiceByName("ResumeProcessor");
     }
   }
 
-  private static final class TextProcessorFileDescriptorSupplier
-      extends TextProcessorBaseDescriptorSupplier {
-    TextProcessorFileDescriptorSupplier() {}
+  private static final class ResumeProcessorFileDescriptorSupplier
+      extends ResumeProcessorBaseDescriptorSupplier {
+    ResumeProcessorFileDescriptorSupplier() {}
   }
 
-  private static final class TextProcessorMethodDescriptorSupplier
-      extends TextProcessorBaseDescriptorSupplier
+  private static final class ResumeProcessorMethodDescriptorSupplier
+      extends ResumeProcessorBaseDescriptorSupplier
       implements io.grpc.protobuf.ProtoMethodDescriptorSupplier {
     private final java.lang.String methodName;
 
-    TextProcessorMethodDescriptorSupplier(java.lang.String methodName) {
+    ResumeProcessorMethodDescriptorSupplier(java.lang.String methodName) {
       this.methodName = methodName;
     }
 
@@ -351,11 +350,11 @@ public final class TextProcessorGrpc {
   public static io.grpc.ServiceDescriptor getServiceDescriptor() {
     io.grpc.ServiceDescriptor result = serviceDescriptor;
     if (result == null) {
-      synchronized (TextProcessorGrpc.class) {
+      synchronized (ResumeProcessorGrpc.class) {
         result = serviceDescriptor;
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
-              .setSchemaDescriptor(new TextProcessorFileDescriptorSupplier())
+              .setSchemaDescriptor(new ResumeProcessorFileDescriptorSupplier())
               .addMethod(getGenerateGraphMethod())
               .addMethod(getGenerateWordCloudMethod())
               .build();

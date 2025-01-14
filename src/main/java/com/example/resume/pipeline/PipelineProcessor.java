@@ -1,32 +1,56 @@
-package com.example.resume.core;
-
+package com.example.resume.pipeline;
+import com.example.resume.core.Pipeline;
+import com.example.resume.dto.SectionDto;
+import com.example.resume.entity.SectionType;
+import com.example.resume.service.ResumeService;
+import com.example.resume.service.SectionService;
+import com.example.resume.service.SkillService;
+import io.grpc.ManagedChannel;
+import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-
 import java.io.File;
-import java.nio.file.Files;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Service
 public class PipelineProcessor {
+    private ManagedChannel channel;
+    @Autowired
+    private ResumeService resumeService;
+    @Autowired
+    private SectionService sectionService;
+    @Autowired
+    private SkillService skillService;
 
-    private final Pipeline<File, String> filePipeline;
-    private final Pipeline<String, String> textPipeline;
-    private final Pipeline<String, List<String>> sectionPipeline;
-    private final Pipeline<String, List<String>> keywordPipeline;
-    private final Pipeline<String, List<String>> skillPipeline;
 
-    public PipelineProcessor(Pipeline<File, String> filePipeline,
-                             Pipeline<String, String> textPipeline,
-                             Pipeline<String, List<String>> sectionPipeline,
-                             Pipeline<String, List<String>> keywordPipeline,
-                             Pipeline<String, List<String>> skillPipeline) {
-        this.filePipeline = filePipeline;
-        this.textPipeline = textPipeline;
-        this.sectionPipeline = sectionPipeline;
-        this.keywordPipeline = keywordPipeline;
-        this.skillPipeline = skillPipeline;
+    private final Pipeline<File, Long> resumePdfContentExtractorPipeline;
+    private final Pipeline<Long, Long> resumeEducationsExtractionPipeline;
+    private final Pipeline<Long, Long> resumeWorkExperiencesExtractionPipeline;
+    private final Pipeline<Long, Long> resumeSkillsExtractionPipeline;
+    private final Pipeline<Long, Long> resumeSummaryExtractionPipeline;
+    private final Pipeline<Long, Long> resumePersonalInfoExtractionPipeline;
+
+    private final Pipeline<Long, Long> resumeSectoionExtractionPipeline;
+
+    private PipelineProcessor(
+            Pipeline<File, Long> resumePdfContentExtractorPipeline,
+            @Qualifier("education") Pipeline<Long, Long> resumeEducationsExtractionPipeline,
+            @Qualifier("experience") Pipeline<Long, Long> resumeWorkExperiencesExtractionPipeline,
+            @Qualifier("skill") Pipeline<Long, Long> resumeSkillsExtractionPipeline,
+            @Qualifier("summary") Pipeline<Long, Long> resumeSummaryExtractionPipeline,
+            @Qualifier("personalInfo") Pipeline<Long, Long> resumePersonalInfoExtractionPipeline,
+            @Qualifier("section") Pipeline<Long, Long> resumeSectoionExtractionPipeline) {
+        this.resumePdfContentExtractorPipeline = resumePdfContentExtractorPipeline;
+        this.resumeEducationsExtractionPipeline = resumeEducationsExtractionPipeline;
+        this.resumeWorkExperiencesExtractionPipeline = resumeWorkExperiencesExtractionPipeline;
+        this.resumeSkillsExtractionPipeline = resumeSkillsExtractionPipeline;
+        this.resumeSummaryExtractionPipeline = resumeSummaryExtractionPipeline;
+        this.resumePersonalInfoExtractionPipeline = resumePersonalInfoExtractionPipeline;
+        this.resumeSectoionExtractionPipeline = resumeSectoionExtractionPipeline;
     }
 
     public String process(File inputDirectory) {
@@ -35,28 +59,11 @@ public class PipelineProcessor {
         StringBuilder result = new StringBuilder();
 
         try {
-            for (File file : filesToProcess) {
-                // Извлечение текста из файла
-                String extractedText = filePipeline.execute(file);
-
-                // Нормализация текста
-                String normalizedText = textPipeline.execute(extractedText);
-
-                // Разбиение на секции
-                List<String> sections = sectionPipeline.execute(normalizedText);
-
-                // Поиск ключевых слов
-                List<String> keywords = keywordPipeline.execute(normalizedText);
-
-                // Поиск навыков
-                List<String> skills = skillPipeline.execute(normalizedText);
-
-                // Собираем результаты
-                result.append("File: ").append(file.getName()).append("\n")
-                        .append("Category: ").append(categorizationPipeline.execute(normalizedText)).append("\n")
-                        .append("Sections: ").append(sections).append("\n")
-                        .append("Keywords: ").append(keywords).append("\n")
-                        .append("Skills: ").append(skills).append("\n\n");
+            for (File pdfFile : filesToProcess) {
+                Long resumeId = resumePdfContentExtractorPipeline.execute(pdfFile);
+                Long resumeId3 = resumeSectoionExtractionPipeline.execute(resumeId);
+                Long resumeId2 = resumeSkillsExtractionPipeline.execute(resumeId);
+                Long resumeId4 = resumeSummaryExtractionPipeline.execute(resumeId);
             }
             return result.toString();
         } catch (Exception e) {
@@ -64,8 +71,32 @@ public class PipelineProcessor {
             return null;
         }
     }
-
     private List<File> getFilesFromDirectory(File directory) {
-        return List.of(directory.listFiles());
+        File[] files = directory.listFiles((dir, name) -> name.endsWith(".pdf"));
+        return files != null ? List.of(files) : new ArrayList<>();
+    }
+    public static List<SectionDto> extractSectionsByType(List<SectionDto> sectionInfos, SectionType typeToExtract) {
+        List<SectionDto> result = new ArrayList<>();
+
+        for (SectionDto sectionInfo : sectionInfos) {
+            SectionType type = SectionType.identifySectionType(sectionInfo.toString());
+
+            if (type == typeToExtract) {
+                result.add(sectionInfo);
+            }
+        }
+
+        return result;
+    }
+    @PreDestroy
+    public void shutdown() {
+        channel.shutdown();
+        try {
+            if (!channel.awaitTermination(5, TimeUnit.SECONDS)) {
+                channel.shutdownNow();
+            }
+        } catch (InterruptedException e) {
+            channel.shutdownNow();
+        }
     }
 }

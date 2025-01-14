@@ -1,26 +1,32 @@
 syntax = "proto3";
 
-service TextProcessor {
-  rpc GenerateGraph (TextRequest) returns (ImageResponse);
-  rpc GenerateWordCloud (TextRequest) returns (ImageResponse);
+service ResumeProcessor {
+  rpc GenerateGraph (GraphRequest) returns (ImageResponse);
+  rpc GenerateWordCloud (WordCloudRequest) returns (ImageResponse);
 }
 
-message TextRequest {
+message GraphRequest {
   string text = 1;
   GraphType type = 2;
   GraphInfo info = 3;
-}
-
-message ImageResponse {
-  bytes image_data = 1;
-}
-
-enum GraphType {
-  UNKNOWN = 0;
-  BAR = 1;
-  PIE = 2;
-  DONUT = 3;
-  NETWORK_DIAGRAM = 4;
+  int32 width = 4;            // Ширина изображения
+  int32 height = 5;           // Высота изображения
+  string background_color = 6; // Цвет фона
+  string colormap = 7;        // Цветовая схема
+  bool grid = 8;              // Включение сетки
+  bool log_scale_x = 9;       // Логарифмическая шкала для оси X
+  bool log_scale_y = 10;      // Логарифмическая шкала для оси Y
+  string legend_position = 11; // Положение легенды
+  int32 title_size = 12;      // Размер шрифта заголовка
+  int32 xlabel_size = 13;     // Размер шрифта для подписи оси X
+  int32 ylabel_size = 14;     // Размер шрифта для подписи оси Y
+  string line_style = 15;     // Стиль линий
+  string marker_style = 16;   // Стиль маркеров
+  float opacity = 17;         // Прозрачность элементов
+  string grid_color = 18;     // Цвет сетки
+  string grid_line_style = 19; // Стиль линий сетки
+  float grid_line_width = 20; // Толщина линий сетки
+  string number_format = 21;  // Формат отображения чисел
 }
 
 message GraphInfo {
@@ -33,25 +39,58 @@ message GraphInfo {
 message BarInfo {
   repeated string labels = 1;
   repeated int32 values = 2;
+  string title = 3;
+  string xlabel = 4;
+  string ylabel = 5;
+  int32 xticks_rotation = 6;
+  repeated string colors = 7;  // Цвета столбцов
+  bool show_values_on_bars = 8; // Показывать значения на столбцах
 }
 
 message PieInfo {
   repeated string labels = 1;
   repeated int32 values = 2;
+  string title = 3;
+  repeated string colors = 4;  // Цвета секторов
+  bool show_percentages_on_pie = 5; // Показывать проценты на секторах
 }
 
 message DonutInfo {
   repeated string labels = 1;
   repeated int32 values = 2;
   float hole_size = 3;
+  string title = 4;
+  repeated string colors = 5;  // Цвета секторов
 }
 
 message NetworkDiagramInfo {
-  repeated string nodes = 1;
-  repeated Edge edges = 2;
+  repeated string nodes = 1;  // Узлы
+  repeated Edge edges = 2;    // Рёбра
+  string title = 3;           // Заголовок графика
 }
 
 message Edge {
   string source = 1;
   string target = 2;
+}
+
+message WordCloudRequest {
+  string text = 1;
+  int32 width = 2;            // Ширина изображения
+  int32 height = 3;           // Высота изображения
+  int32 max_font_size = 4;    // Максимальный размер шрифта
+  string background_color = 5; // Цвет фона
+  string colormap = 6;        // Цветовая схема
+  int32 margin = 7;           // Отступ между словами
+}
+
+message ImageResponse {
+  bytes image_data = 1;
+}
+
+enum GraphType {
+  BAR = 0;
+  PIE = 1;
+  DONUT = 2;
+  NETWORK_DIAGRAM = 3;
 }

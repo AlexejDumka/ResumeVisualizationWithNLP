@@ -1,7 +1,20 @@
-package com.example.resume.entity;
+package com.example.resume.dto;
+import lombok.*;
+import java.io.Serializable;
 
-/**
- * DTO for {@link com.example.resume.entity.Resume}
- */
-public class ResumeDto {
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class ResumeDto implements Serializable {
+    Long id;
+    byte[] pdfFormat;
+    byte[] txtFormat;
+    byte[] normalizedFormat;
+    String name;
+    String address;
+    String email;
+    String phone;
+    String linkedinLink;
+    String githubLink;
 }
