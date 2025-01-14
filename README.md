@@ -2,8 +2,7 @@
 
 ## Overview
 
-ResumeVisualizationWithNLP is a project aimed at leveraging Natural Language Processing (NLP) techniques to analyze resumes and visualize their contents. This tool is designed to help recruiters and HR professionals streamline the resume screening process, identify key skills, and better understand candidate profiles.
-
+Application is aimed to prove usage of Natural Language Processing (NLP) to analyze resume and visualize its content.
 ---
 
 ## Features
